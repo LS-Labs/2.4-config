@@ -5,7 +5,7 @@ This config file is provided as a reference only. Please read the voron docs and
 
 Warning:- Do not just copy this over and then click print. At best it might just fail with an error and at worst it may crash your new printer toolhead into the bed or overshoot on heating. Follow the Voron Guide on initial setup and testing using this as a template for your values before using it.
 
-On your first homing and any tests it is worth hovering your mouser over the emergency stop button just in case. 
+On your first homing and any tests it is worth hovering your mouse over the emergency stop button just in case. 
 
 Everything in this config is based on the amazing work done by the Voron team and the amazing support from the members of the Voron Discord. Without whom I would not be printing today.
 
@@ -30,7 +30,7 @@ All hardware based configs are in the /machine/ folder
     nevermore.cfg contains the config for the nevermore. Note the additions to your print start macro / start gcode for your slicer that is detailed at the top of the file. The delayed gcode macro to tunr the fan off after a specified time is in this file and not in the Macros folder.
     stealthburnerleds.cfg contains the config for the toolhead LED's
     steppers.cfg contains the stepper motor configs for the X,Y and Z steppers
-    temps.cfg contains the config for additional temp readouts. Thius has the chamber temp MCU and Rpi. The Extruder and Bed temp definitions are in Heaters.cfg and extruder.cfg
+    temps.cfg contains the config for additional temp readouts. This has the chamber temp MCU and Rpi. The Extruder and Bed temp definitions are in Heaters.cfg and extruder.cfg
 
 ## Macros
 
@@ -41,11 +41,11 @@ the main /macros/macro.cfg then includes the following.
     line 9 includes the G32 macro which homes all axis then QGL and then another home in prep for printing.
     line 10 includes a very basic M600 macro which currently just pauses the printer and beeps to notify you.
     line 11 includes an unload and load filament macro for us when swapping filaments.
-    line 12 is the modified nozzle scrub macro. This is for use with the decontaminator nozzle mod. As we had the nozzle crash into the brush when starting a print we modified this to just purge on a single side and then move in front of the bursh before resuming. see https://github.com/VoronDesign/VoronUsers/tree/master/orphaned_mods/printer_mods/edwardyeeks/Decontaminator_Purge_Bucket_%26_Nozzle_Scrubber for more and comparison to the standard file
+    line 12 is the modified nozzle scrub macro. This is for use with the decontaminator nozzle mod. As we had the nozzle crash into the brush when starting a print we modified this to just purge on a single side and then move in front of the brush before resuming. see https://github.com/VoronDesign/VoronUsers/tree/master/orphaned_mods/printer_mods/edwardyeeks/Decontaminator_Purge_Bucket_%26_Nozzle_Scrubber for more and comparison to the standard file
 
 The /macros/main folder has all files included and contains
     beeper.cfg is a basic macro to accept arguments to make some beeps. this is used for example by the M600 macro to notify you that it is paused and by the print end macro.
-    pauseresume.cfg makes some more sensible pause and resume macros to park the toolhead at the front left corner during a pause so it is easier to swap filaments and some checks to confirm it can extrude or restrat filament safely.
+    pauseresume.cfg makes some more sensible pause and resume macros to park the toolhead at the front left corner during a pause so it is easier to swap filaments and some checks to confirm it can extrude or restart filament safely.
     printend.cfg contains the PRINT_END macro which you will use in your slicer it also clears the currently set bed mesh
     prinstart.cfg contains everything for the start print including the nozzle scrub. it also checks if the printer is already homed and QGL has been run so it doesnt need to do it again.
 
