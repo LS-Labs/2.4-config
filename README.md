@@ -14,7 +14,12 @@ You will need to follow some steps to configure your printer in order for this t
 This config uses seperate folders and files for different configs allowing easy updates without having to go through a single very long printer.cfg file
 
 This works by using as an example ```[include machine/*.cfg]``` in the printer.cfg file. This instructs klipper to include all files in the machine folder relative to the printer.cfg file.
+
 This is used extensively throughout this config so please familiarise yourself with it now.
+
+# What file contains what
+
+## Hardware Definitions
 
 All hardware based configs are in the /machine/ folder
     adxl.cfg contains the adxl information
@@ -26,6 +31,8 @@ All hardware based configs are in the /machine/ folder
     stealthburnerleds.cfg contains the config for the toolhead LED's
     steppers.cfg contains the stepper motor configs for the X,Y and Z steppers
     temps.cfg contains the config for additional temp readouts. Thius has the chamber temp MCU and Rpi. The Extruder and Bed temp definitions are in Heaters.cfg and extruder.cfg
+
+## Macros
 
 Macros are contained in the /macros folder and are included in printer.cfg on line 10 [include macros/macros.cfg]
 the main /macros/macro.cfg then includes the following.
@@ -45,16 +52,23 @@ The /macros/main folder has all files included and contains
 for these macros to work well your superslicer config should contain the following
 
 start g-code
-```M190 S0
+```
+M190 S0
 M109 S0 ; uncomment to remove set&wait temp gcode added automatically after this start gcode
 print_start EXTRUDER=[first_layer_temperature[initial_tool]] BED=[first_layer_bed_temperature]
-SET_FAN_SPEED FAN=Nevermore SPEED=1```
+SET_FAN_SPEED FAN=Nevermore SPEED=1
+```
+
 
 This passes the extruder and bed temps to the system and enables the nevermore fan when starting. 
 
 End G-Code
-```UPDATE_DELAYED_GCODE ID=filter_off DURATION=600
-PRINT_END```
+
+```
+UPDATE_DELAYED_GCODE ID=filter_off DURATION=600
+PRINT_END
+```
+
 
 This passes a delay of 600 seconds (ten mins) to the nevermore delayed gcode which will turn off the nevermore after 10 mins has passed after the print ends.
 
@@ -68,7 +82,7 @@ This requires you to perform some additional software setup detailed here https:
 
 In the https://www.klipper3d.org/Measuring_Resonances.html#software-installation section you will need to run the commands shown to update klipper and add some additional python libraries.
 
-It is not completely clear in the klipper docs but you will also need to run through the following https://www.klipper3d.org/RPi_microcontroller.html to enable the RPi to be a secondary MCU so that it can recieve and process the adxl information.
+It is not always obvious reading through the klipper docs but you will also need to run through the following https://www.klipper3d.org/RPi_microcontroller.html to enable the RPi to be a secondary MCU so that it can recieve and process the adxl information.
 
 If you do not want to run the adxl tuning for now and just want to start printing. you can just comment out the contents of the adxl file by adding a # to the start of each line and saving the file. 
 
@@ -99,8 +113,8 @@ for the bed run PID_CALIBRATE HEATER=heater_bed TARGET=60
 Save config after each PID tuning to save the config to the printer.cfg file
 
 Z Offset.
-When you have homed the printer you will need to set your Z offset. W do this by centering the toolhead to 175 175 on the X and Y and then move the z down gradually using the controlls in mainsail until it is at Z 0
-Then below the main cotnrols you have the Z offset. move the toolhead down gradually using these microsteps using a piece of paper to confirm the height is just off the bed.
+When you have homed the printer you will need to set your Z offset. We do this by centering the toolhead to 175 175 on the X and Y and then move the z down gradually using the controls in mainsail until it is at Z 0
+Then below the main controls you have the Z offset. Move the toolhead down gradually using these microsteps using a piece of paper to confirm the height is just off the bed.
 Once this is completed you then use the Z offset save button and "Save to probe" This will write the offset to the probe offset value which is saved in the printer.cfg file. 
 
 
