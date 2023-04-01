@@ -1,5 +1,5 @@
 # 2.4-config
-Voron 2.4 config for the [LSLabs Voron 2.4 Full Kit]([url](https://www.lslabs.co.uk/product/voron-2-4r2-full-kit/))
+Voron 2.4 config for the [LSLabs Voron 2.4 Full Kit](https://www.lslabs.co.uk/product/voron-2-4r2-full-kit/)
 
 This config file is provided as a reference only. Please read the voron docs and configure your printer carefully to avoid any mishaps 
 
